@@ -12,60 +12,102 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
+  body {
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+
+  /* A4 PAGE SETUP */
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  @media print {
     body {
-      background: #f5f5f5;
-      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
     }
 
     .clearance-card {
-      background: #fff;
-      padding: 40px;
-      margin: 40px auto;
-      max-width: 900px;
-      border: 1px solid #ddd;
+      border: none;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
     }
+  }
 
-    .header-line {
-      border-top: 2px solid #000;
-      margin-bottom: 20px;
-    }
+  .clearance-card {
+    background: #fff;
+    padding: 30px 35px;
+    margin: 20px auto;
+    width: 210mm;
+    min-height: 297mm;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+  }
 
-    .title-green {
-      color: #0f5132;
-      font-weight: 700;
-      font-size: 24px;
-    }
+  .header-line {
+    border-top: 2px solid #000;
+    margin-bottom: 15px;
+  }
 
-    .label {
-      font-weight: bold;
-    }
+  .title-green {
+    color: #0f5132;
+    font-weight: 700;
+    font-size: 22px;
+  }
 
-    .section-title {
-      font-weight: bold;
-      margin-top: 20px;
-    }
+  .label {
+    font-weight: bold;
+  }
 
-    .qr-box {
-      text-align: center;
-      margin-top: 20px;
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    }
+  .section-title {
+    font-weight: bold;
+    margin-top: 15px;
+  }
 
-    .footer-text {
-      font-size: 13px;
-      margin-top: 10px;
-    }
+  .row {
+    margin-bottom: 4px;
+  }
 
-    .nerd-logo {
-      width: 50px;
-    }
-    #complied{
-        background-color: #0c9756;
-        color: black;
-    }
-  </style>
+  .qr-box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    margin-top: 8px;
+    word-break: break-word;
+  }
+
+  .nerd-logo {
+    width: 45px;
+  }
+
+  #complied {
+    background-color: #0c9756;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  /* Prevent layout breaking */
+  .row > div {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+</style>
 </head>
 
 <body>

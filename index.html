@@ -4,212 +4,215 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NERD Clearance</title>
-    <link rel="stylesheet" href ="styles.css">
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- QR Code Generator -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
   <style>
-  body {
-    background: #f5f5f5;
-    font-family: Arial, sans-serif;
-  }
-
-  /* A4 PAGE SETUP */
-  @page {
-    size: A4;
-    margin: 10mm;
-  }
-
-  @media print {
-    body {
-      background: #fff;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 100%;
-      padding: 0;
-    }
-
-    .clearance-card {
-      border: none;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-shadow: none;
     }
-  }
 
-  .clearance-card {
-    background: #fff;
-    padding: 30px 35px;
-    margin: 20px auto;
-    width: 210mm;
-    min-height: 297mm;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-  }
+    body {
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
 
-  .header-line {
-    border-top: 2px solid #000;
-    margin-bottom: 15px;
-  }
+    /* ── Screen: centre the A4 card ── */
+    .page-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
 
-  .title-green {
-    color: #0f5132;
-    font-weight: 700;
-    font-size: 22px;
-  }
+    /* ── A4 card ── */
+    .clearance-card {
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 14mm 16mm;
+      border: 1px solid #ddd;
+    }
 
-  .label {
-    font-weight: bold;
-  }
+    /* ── Print: fill the page exactly ── */
+    @page {
+      size: A4 portrait;
+      margin: 10mm;
+    }
 
-  .section-title {
-    font-weight: bold;
-    margin-top: 15px;
-  }
+    @media print {
+      body { background: #fff; }
 
-  .row {
-    margin-bottom: 4px;
-  }
+      .page-wrapper {
+        display: block;
+        padding: 0;
+      }
 
-  .qr-box {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+      .clearance-card {
+        width: 100%;
+        min-height: auto;
+        border: none;
+        padding: 0;
+      }
+    }
 
-  .footer-text {
-    font-size: 12px;
-    margin-top: 8px;
-    word-break: break-word;
-  }
+    /* ── Header rule ── */
+    .header-rule {
+      border: none;
+      border-top: 2px solid #000;
+      margin-bottom: 12px;
+    }
 
-  .nerd-logo {
-    width: 45px;
-  }
+    /* ── Top row: title + NDN ── */
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
 
-  #complied {
-    background-color: #0c9756;
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-  }
+    .title-green {
+      color: #0f5132;
+      font-weight: 700;
+      font-size: 20px;
+    }
 
-  /* Prevent layout breaking */
-  .row > div {
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
-
+    /* ── Info lines ── */
     .info-line {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 6px;
-}
+      display: flex;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
 
-.label {
-  min-width: 170px;
-  font-weight: bold;
-  white-space: nowrap;
-}
+    .label {
+      min-width: 160px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
 
-.value {
-  white-space: nowrap;
-}
+    /* ── Section headings ── */
+    .section-title {
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
 
-.issued-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
+    /* ── Complied badge ── */
+    .badge-complied {
+      display: inline-block;
+      background: #0c9756;
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
 
-.issued-left {
-  flex: 2;
-}
+    /* ── Issued-by / QR row ── */
+    .issued-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-top: 18px;
+    }
 
-.issued-right {
-  flex: 1;
-  text-align: center;
-}
-</style>
+    .issued-left {
+      flex: 2;
+    }
+
+    .issuer-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .nerd-logo {
+      width: 42px;
+      flex-shrink: 0;
+    }
+
+    .issued-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      margin-top: 6px;
+      word-break: break-word;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="page-wrapper">
   <div class="clearance-card">
 
-    <div class="header-line"></div>
+    <hr class="header-rule">
 
-    <!-- Header -->
-    <div class="d-flex justify-content-between">
+    <!-- Header row -->
+    <div class="top-row">
       <div class="title-green">NERD Compliance Clearance</div>
       <div><strong>NDN:</strong> PRJ-285323831776759972</div>
     </div>
 
-    <!-- Title -->
-    <div class="info-line mt-3">
+    <!-- Info lines -->
+    <div class="info-line">
       <span class="label">Title:</span>
-      <span class="value">ENTREPRENEURIAL ORIENTATION AND ORGANIZATIONAL SUSTAINABILITY OF QUICK SERVICE RESTAURANTS IN PORT HARCOURT, RIVERS STATE.</span>
+      <span>ENTREPRENEURIAL ORIENTATION AND ORGANIZATIONAL SUSTAINABILITY OF QUICK SERVICE RESTAURANTS IN PORT HARCOURT, RIVERS STATE.</span>
     </div>
 
-    <!-- Details -->
     <div class="info-line">
       <span class="label">Student name:</span>
-      <span class="value">Ndorbu Manfred Baribe</span>
+      <span>Ndorbu Manfred Baribe</span>
     </div>
 
     <div class="info-line">
       <span class="label">Institution:</span>
-      <span class="value">RIVERS STATE UNIVERSITY, PORT HARCOURT, RIVERS STATE</span>
+      <span>RIVERS STATE UNIVERSITY, PORT HARCOURT, RIVERS STATE</span>
     </div>
 
     <div class="info-line">
       <span class="label">Faculty:</span>
-      <span class="value">MANAGEMENT</span>
+      <span>MANAGEMENT</span>
     </div>
 
     <div class="info-line">
       <span class="label">Department:</span>
-      <span class="value">Administration and Management</span>
+      <span>Administration and Management</span>
     </div>
 
     <div class="info-line">
       <span class="label">Submission Type:</span>
-      <span class="value">Project</span>
+      <span>Project</span>
     </div>
 
     <div class="info-line">
       <span class="label">Date of Submission:</span>
-      <span class="value">2026-04-21 10:28:11</span>
+      <span>2026-04-21 10:28:11</span>
     </div>
 
     <!-- Compliance -->
     <div class="section-title">Compliance</div>
     <div>NCVS Compliance: Not enforced</div>
-    <div>Academic report submission: <span id="complied">Complied</span></div>
+    <div>Academic report submission: <span class="badge-complied">Complied</span></div>
 
     <!-- Contribution -->
     <div class="section-title">Contribution</div>
     <div>Amount contributed to support platform: ₦4,850</div>
 
-    <!-- Issued By + QR -->
-    <div class="issued-wrapper mt-4">
-      
-      <!-- Left -->
+    <!-- Issued by + QR -->
+    <div class="issued-row">
+
       <div class="issued-left">
         <div class="section-title">Issued by</div>
-
-        <div class="d-flex align-items-start mt-2">
-          <img src="https://iaue.edu.ng/wp-content/uploads/2025/11/nerd_logo.png" class="nerd-logo me-2" alt="NERD Logo">
+        <div class="issuer-body">
+          <img src="https://iaue.edu.ng/wp-content/uploads/2025/11/nerd_logo.png" class="nerd-logo" alt="NERD Logo">
           <div>
             The Nigeria Education Repository and Databank (N.E.R.D)<br>
             Under the National Policy for NERD.<br>
@@ -220,7 +223,6 @@
         </div>
       </div>
 
-      <!-- Right QR -->
       <div class="issued-right">
         <div id="qrcode"></div>
         <div class="footer-text">
